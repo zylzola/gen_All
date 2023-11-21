@@ -27,6 +27,6 @@
  * O(n^2)
  * O(k^n)
  * O(n!)
- * 常见递归的算法： 二分查找O(log n) 二叉树 O(n) 排序查找二维矩阵查找O(n), 一维是O（log n） 排序快排归并排序 O(nlog n)
+ * 常见递归的算法时间复杂度： 二分查找O(log n) 二叉树 O(n) Optimal sorted matrix search排序查找二维矩阵查找O(n), 一维是O（log n） Merge sort排序快排归并排序 O(nlog n)
 #### 空间复杂度：
  */
