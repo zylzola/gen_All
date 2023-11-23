@@ -65,3 +65,28 @@ function reverseList2(head) {
 
   return head;
 }
+function ListNode(val) {
+  this.val = val;
+  this.next = null;
+}
+/***
+ * 给定一个链表，反转链表中相邻的两个节点
+ * 1->2->3->4->5->null
+ * */
+function reverseList3(head) {
+  if (!head || !head.next) return head;
+  let dyTemp = new ListNode(0);
+  dyTemp.next = head; // 0->1->2->3->4->5->null
+  let temp1,
+    temp2 = null;
+  let curr = dyTemp;
+  while (curr.next && curr.next.next) {
+    temp1 = curr.next; //1
+    temp2 = curr.next.next.next; // 3
+    curr.next = curr.next.next; // 2
+    curr.next.next = temp1; //1
+    curr.next.next.next = temp2; //3
+    curr = curr.next.next; //1
+  }
+  return dyTemp.next;
+}
