@@ -37,25 +37,31 @@ let head = {
 };
 // console.log(reverseList(head));
 
-/***
- * 给定一个链表，反转链表中相邻的两个节点
- * */
 function reverseList2(head) {
   let prev = null;
   let curr = head;
   while (curr && curr.next) {
-    let next = curr.next;
-    curr.next = next.next;
-    next.next = curr;
+    //获取当前节点的next
+    let next = curr.next; // 2->3->4->5->null    4->5->null
+    //当前节点next 变为 之前已经调整好的节点
+    curr.next = next.next; // 1->3->4->5->null   3->5->null
+    //
+    next.next = curr; //  2->1->3->4->5->null    4->3->5->null
+    // prev 存储已经调整好的节点，为了下一轮使用
     if (prev) {
-      prev.next = next;
+      prev.next = next; //                       1->4->3->5->null
+      console.log("prev if:", prev, "next if:", next);
     } else {
-      head = next;
+      head = next; // 2->1->3->4->5->null
+      console.log("head:", head, "next if00:", next);
     }
-    prev = curr;
-    curr = curr.next;
+    prev = curr; // 1->3->4->5->null             3->5->null
+    console.log("prev", prev);
+    curr = curr.next; // 3->4->5->null           5->null
+    console.log('"CURR', curr);
   }
+  console.log("prev111111", prev);
+  console.log("curr111111", curr);
+
   return head;
 }
-//验证reverseList2
-console.log(reverseList2(head));
