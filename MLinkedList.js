@@ -90,3 +90,55 @@ function reverseList3(head) {
   }
   return dyTemp.next;
 }
+
+
+let head = {
+  val: 1,
+  next: {
+    val: 2,
+    next: {
+      val: 3,
+      next: {
+        val: 4,
+        next: {
+          val: 5,
+          next: null,
+        },
+      },
+    },
+  },
+};
+
+let head2 = {
+  val: 7,
+  next: {
+    val:9,
+    next: {
+      val: 6,
+      next:{
+        val:99,
+        next:{
+          val: 3,
+          next: {
+            val: 4,
+            next: {
+              val: 5,
+              next: null,
+            },
+          },
+        }
+      }
+    },
+  },
+};
+function getIntersetctionNode2(headA, headB) {
+  let currA = headA, currB = headB;
+  while(currA != currB) {
+    console.log("111",currA)
+    console.log("222",currB)
+
+    currA = currA==null ?headB  : currA.next;
+    currB = currB==null ?headA  : currB.next;
+  }
+  return currA;
+}
