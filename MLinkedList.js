@@ -133,12 +133,23 @@ let head2 = {
 };
 function getIntersetctionNode2(headA, headB) {
   let currA = headA, currB = headB;
-  while(currA != currB) {
-    console.log("111",currA)
-    console.log("222",currB)
-
+  while(!isSame(currA , currB)) {
     currA = currA==null ?headB  : currA.next;
     currB = currB==null ?headA  : currB.next;
   }
   return currA;
 }
+
+function isSame(headA, headB) {
+  if (!headA || !headB) return false;
+  while(headA) {
+      if (headA && headB && headA.val != headB.val) {
+        return false;
+    }
+    headA = headA.next;
+    headB = headB.next;
+  }
+  return headA==null && headB == null;;
+}
+
+let cur = getIntersetctionNode2(head,head2);
