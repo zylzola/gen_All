@@ -284,7 +284,7 @@ module.exports = Editor.Panel.define({
     "utf-8"
   ),
   style: readFileSync(
-    join(__dirname, "../../../static/style/default/index.css"),
+    join(__dirname, "../../../static/style/index.css"),
     "utf-8"
   ),
   $: {
