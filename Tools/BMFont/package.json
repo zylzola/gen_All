@@ -1,0 +1,63 @@
+{
+    "package_version": 2,
+    "version": "1.0.0",
+    "name": "bitmapfont",
+    "description": "i18n:vue2-template.description",
+    "main": "./dist/main.js",
+    "dependencies": {
+        "@electron/remote": "^2.1.0",
+        "fs-extra": "^10.0.0",
+        "vue": "2.6.14"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^9.0.5",
+        "@types/node": "^16.0.1",
+        "electron": "^27.1.2",
+        "typescript": "^4.3.4"
+    },
+    "panels": {
+        "default": {
+            "title": "vue2-template Default Panel",
+            "type": "dockable",
+            "main": "dist/panels/default",
+            "size": {
+                "min-width": 400,
+                "min-height": 300,
+                "width": 1024,
+                "height": 600
+            }
+        }
+    },
+    "contributions": {
+        "menu": [
+            {
+                "path": "i18n:menu.panel/vue2-template",
+                "label": "i18n:vue2-template.open_panel",
+                "message": "open-panel"
+            },
+            {
+                "path": "i18n:menu.develop/vue2-template",
+                "label": "i18n:vue2-template.send_to_panel",
+                "message": "send-to-panel"
+            }
+        ],
+        "messages": {
+            "open-panel": {
+                "methods": [
+                    "openPanel"
+                ]
+            },
+            "send-to-panel": {
+                "methods": [
+                    "default.hello"
+                ]
+            }
+        }
+    },
+    "author": "Cocos Creator",
+    "editor": ">=3.8.0",
+    "scripts": {
+        "build": "tsc -b",
+        "watch": "tsc -w"
+    }
+}
