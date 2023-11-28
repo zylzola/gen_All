@@ -160,36 +160,20 @@ chars count=${this.imageList.length}`;
         this.saveFnt();
       });
     },
-    selectFolder(func: any) {
-      let self = this;
-      //   Editor.Scene.callSceneScript(
-      //     "bitmapfont",
-      //     "getCocosVersion",
-      //     function (err: any, version: any) {
-      // let result = self.compareVersion(version, "2.4.5");
-      //       Editor.log("版本号： ", version, "结果", result);
-      //       if (result >= 0) {
-      //大于等于2.4.5版本
-      console.log("dialog::", dialog);
+    //打开资源管理器，保存文件
+    selectFolder(func: Function) {
       dialog
-        .showSaveDialog({ properties: ["createDirectory"] })
-        .then((result) => {
-          let fontPath = result.filePath;
-          console.log("保存路径： ", fontPath);
-          self.selectSuccess(fontPath, func);
+        .showSaveDialog({
+          title: "保存文件",
+          defaultPath: this.filePath,
+          filters: [{ name: "自定义字体", extensions: ["fnt"] }],
         })
-        .catch((err) => {
+        .then((result: any) => {
+          this.selectSuccess(result.filePath, func);
+        })
+        .catch((err: any) => {
           console.log(err);
         });
-      //   } else {
-      //     let fontPath = dialog.showSaveDialog({
-      //       properties: ["createDirectory"],
-      //     });
-      //     // Editor.Log("保存路径： ", fontPath);
-      //     self.selectSuccess(fontPath, func);
-      //   }
-      // }
-      //   );
     },
     compareVersion(v1: any, v2: any): any {
       let vers1 = v1.split(".");
@@ -239,23 +223,20 @@ chars count=${this.imageList.length}`;
       }
     },
     saveFnt() {
-      console.log("保存fnt");
       writeFileSync(
         this.filePath.replace(/\\/g, "/") + "/" + this.fontName + ".fnt",
         this.fontInfo
       );
       console.log("保存fnt成功");
     },
+    // 保存png
     savePng() {
-      console.log("保存png", this.fontCanvas);
       let src = this.fontCanvas.toDataURL("image/png");
-      console.log("src::", src);
-      let data = src.replace(/^data:image\/\w+;base64,/, "");
-      let buffer = new window.Buffer(data, "base64");
-      console.log(src, data, buffer);
+      let base64 = src.replace(/^data:image\/\w+;base64,/, "");
+      let dataBuffer = Buffer.from(base64, "base64");
       writeFileSync(
         this.filePath.replace(/\\/g, "/") + "/" + this.fontName + ".png",
-        buffer
+        dataBuffer
       );
       console.log("保存png成功");
     },
@@ -284,7 +265,7 @@ module.exports = Editor.Panel.define({
     "utf-8"
   ),
   style: readFileSync(
-    join(__dirname, "../../../static/style/index.css"),
+    join(__dirname, "../../../static/style/default/index.css"),
     "utf-8"
   ),
   $: {
